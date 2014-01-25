@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *screenName;
 @property (nonatomic, strong) NSString *tweetText;
+@property (nonatomic, strong) NSString *createdAt;
+@property (nonatomic, assign) int retweetCount;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -22,7 +22,7 @@
     for (NSDictionary *params in array) {
         if (count == 0) {
             //NSDictionary *user = [params //valueForKeyPath:@"user"];
-            //NSLog(@"%@", params.allKeys);
+            NSLog(@"%@", params);
         }
 
         [tweets addObject:[[Tweet alloc] initWithDictionary:params]];
@@ -40,6 +40,8 @@
         self.userName = [user valueForKey:@"name"];
         self.tweetText = dictionary[@"text"];
         self.profileImageURL = [NSURL URLWithString:user[@"profile_image_url"]];
+        self.createdAt = dictionary[@"created_at"];
+        self.retweetCount = [dictionary[@"retweet_count"] intValue];
     }
     
     return self;
