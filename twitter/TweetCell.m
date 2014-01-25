@@ -7,6 +7,7 @@
 //
 
 #import "TweetCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation TweetCell
 
@@ -24,6 +25,16 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)loadData
+{
+    self.nameLabel.text = self.tweet.userName;
+    self.screenNameLabel.text = self.tweet.screenName;
+    self.tweetTextView.text = self.tweet.tweetText;
+    [self.tweetTextView setTextContainerInset:UIEdgeInsetsZero];
+
+    [self.profileImageView setImageWithURL:self.tweet.profileImageURL];
 }
 
 @end
