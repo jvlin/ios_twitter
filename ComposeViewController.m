@@ -1,20 +1,18 @@
 //
-//  TweetViewController.m
+//  ComposeViewController.m
 //  twitter
 //
 //  Created by Joey Lin on 1/25/14.
 //  Copyright (c) 2014 codepath. All rights reserved.
 //
 
-#import "TweetViewController.h"
+#import "ComposeViewController.h"
 
-@interface TweetViewController ()
-
-@property (nonatomic, strong) Tweet *tweet;
+@interface ComposeViewController ()
 
 @end
 
-@implementation TweetViewController
+@implementation ComposeViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,21 +23,10 @@
     return self;
 }
 
-- (id)initWithTweet:(Tweet *)tweet
-{
-    self = [super init];
-    if (self) {
-        self.tweet = tweet;
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"%@", self.tweet.userName);
 }
 
 - (void)didReceiveMemoryWarning

@@ -1,5 +1,5 @@
 //
-//  TweetViewController.h
+//  ComposeViewController.h
 //  twitter
 //
 //  Created by Joey Lin on 1/25/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TweetViewController : UIViewController
-
-- (id)initWithTweet:(Tweet *)tweet;
+@interface ComposeViewController : UIViewController
 
 @end

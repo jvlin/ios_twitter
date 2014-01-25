@@ -8,6 +8,7 @@
 
 #import "TimelineVC.h"
 #import "TweetCell.h"
+#import "TweetViewController.h"
 
 @interface TimelineVC ()
 
@@ -25,7 +26,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.title = @"Twitter";
+        //self.title = @"Twitter";
         
         [self reload];
     }
@@ -36,9 +37,11 @@
 {
     [super viewDidLoad];
     
+
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     UIBarButtonItem *composeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:nil];
     self.navigationItem.rightBarButtonItem = composeItem;
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Twitter_logo_white.png"]];
     
     UINib *customNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
     [self.tableView registerNib:customNib forCellReuseIdentifier:@"TweetCell"];
@@ -142,8 +145,9 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"selected row: @i", indexPath.row);
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"selected row: %i", indexPath.row);
+    Tweet *tweet = self.tweets[indexPath.row];
+    [self.navigationController pushViewController:[[TweetViewController alloc] initWithTweet:tweet] animated:YES];
 }
 
 /*
