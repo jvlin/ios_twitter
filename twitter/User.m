@@ -29,7 +29,9 @@ static User *_currentUser;
         if (userData) {
             NSDictionary *userDictionary = [NSJSONSerialization JSONObjectWithData:userData options:NSJSONReadingMutableContainers error:nil];
             _currentUser = [[User alloc] initWithDictionary:userDictionary];
+            
             [_currentUser populateAttributesWithDictionary:userDictionary];
+
         }
     }
     
@@ -40,6 +42,9 @@ static User *_currentUser;
     if (currentUser) {
         NSData *userData = [NSJSONSerialization dataWithJSONObject:currentUser.data options:NSJSONWritingPrettyPrinted error:nil];
         [[NSUserDefaults standardUserDefaults] setObject:userData forKey:kCurrentUserKey];
+        NSDictionary *userDictionary = [NSJSONSerialization JSONObjectWithData:userData options:NSJSONReadingMutableContainers error:nil];
+        
+        [_currentUser populateAttributesWithDictionary:userDictionary];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kCurrentUserKey];
         [TwitterClient instance].accessToken = nil;

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "TwitterClient.h"
 #import "TimelineVC.h"
 #import "SignedOutVC.h"
 
