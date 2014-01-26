@@ -9,6 +9,7 @@
 #import "TimelineVC.h"
 #import "TweetCell.h"
 #import "TweetViewController.h"
+#import "ComposeViewController.h"
 
 @interface TimelineVC ()
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) TweetCell *prototypeCell;
 
 - (void)onSignOutButton;
+- (void)onComposeButton;
 - (void)reload;
 
 @end
@@ -39,9 +41,9 @@
     
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
-    UIBarButtonItem *composeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:nil];
+    UIBarButtonItem *composeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(onComposeButton)];
     self.navigationItem.rightBarButtonItem = composeItem;
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Twitter_logo_white.png"]];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TitleIcon"]];
     
     UINib *customNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
     [self.tableView registerNib:customNib forCellReuseIdentifier:@"TweetCell"];
@@ -89,11 +91,12 @@
     
     self.prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
-    self.prototypeCell.tweetTextView.text = tweet.tweetText;
+    self.prototypeCell.tweetTextLabel.text = tweet.tweetText;
 
     [self.prototypeCell layoutIfNeeded];
+    [self.prototypeCell.tweetTextLabel sizeToFit];
     
-    CGFloat height = self.prototypeCell.tweetTextView.contentSize.height;
+    CGFloat height = self.prototypeCell.tweetTextLabel.frame.size.height;
     height += 25;
     if (height < 55) {
         height = 55;
@@ -145,7 +148,6 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"selected row: %i", indexPath.row);
     Tweet *tweet = self.tweets[indexPath.row];
     [self.navigationController pushViewController:[[TweetViewController alloc] initWithTweet:tweet] animated:YES];
 }
@@ -166,6 +168,14 @@
 
 - (void)onSignOutButton {
     [User setCurrentUser:nil];
+}
+
+- (void)onComposeButton {
+    
+    ComposeViewController *cvc = [[ComposeViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cvc];
+    [self.navigationController presentViewController:navController animated:YES completion:nil];
+
 }
 
 - (void)reload {

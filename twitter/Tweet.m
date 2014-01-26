@@ -22,7 +22,7 @@
     for (NSDictionary *params in array) {
         if (count == 0) {
             //NSDictionary *user = [params //valueForKeyPath:@"user"];
-            NSLog(@"%@", params);
+            //NSLog(@"%@", params);
         }
 
         [tweets addObject:[[Tweet alloc] initWithDictionary:params]];
@@ -40,8 +40,35 @@
         self.userName = [user valueForKey:@"name"];
         self.tweetText = dictionary[@"text"];
         self.profileImageURL = [NSURL URLWithString:user[@"profile_image_url"]];
-        self.createdAt = dictionary[@"created_at"];
+        self.favoritesCount = [dictionary[@"favorites_count"] intValue];
+       
+        //format date for tweet view controller
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"EEE MMM dd HH:mm:ss +zzzz yyyy"];
+        NSDate *date = [dateFormat dateFromString:dictionary[@"created_at"]];
+        [dateFormat setDateFormat:@"MM/dd/yyyy h:mm a"];
+        self.createdAt = [dateFormat stringFromDate:date];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss +zzzz yyyy"];
+        NSDate *newDate = [dateFormatter dateFromString:dictionary[@"created_at"]];
+        
+        //calculate time ago
+        NSDate *now = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+        NSTimeInterval deltaTime = [now timeIntervalSinceDate:newDate];
+        
+        if (deltaTime < 60) {
+            self.timeAgo = [NSString stringWithFormat:@"%ds",(int) deltaTime];
+        } else if (deltaTime < 3600) {
+            self.timeAgo = [NSString stringWithFormat:@"%dm",(int) (deltaTime/60)];
+        } else if (deltaTime < 3600*48) {
+            self.timeAgo = [NSString stringWithFormat:@"%dh",(int) (deltaTime/3600)];
+        } else {
+            self.timeAgo = [NSString stringWithFormat:@"%dd",(int) (deltaTime/3600/24)];
+        }
+        
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
+                
     }
     
     return self;

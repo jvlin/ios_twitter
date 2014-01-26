@@ -9,6 +9,12 @@
 #import "User.h"
 #import "TwitterClient.h"
 
+@interface User()
+
+- (void)populateAttributesWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 NSString * const kCurrentUserKey = @"kCurrentUserKey";
@@ -23,6 +29,7 @@ static User *_currentUser;
         if (userData) {
             NSDictionary *userDictionary = [NSJSONSerialization JSONObjectWithData:userData options:NSJSONReadingMutableContainers error:nil];
             _currentUser = [[User alloc] initWithDictionary:userDictionary];
+            [_currentUser populateAttributesWithDictionary:userDictionary];
         }
     }
     
@@ -46,6 +53,14 @@ static User *_currentUser;
         _currentUser = currentUser; // Needs to be set before firing the notification
         [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
     }
+}
+
+- (void)populateAttributesWithDictionary:(NSDictionary *)dictionary
+{
+    self.name = dictionary[@"name"];
+    self.screenName = dictionary[@"screen_name"];
+    self.profileImageURL = [NSURL URLWithString:dictionary[@"profile_image_url"]];
+    
 }
 
 @end

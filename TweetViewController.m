@@ -11,6 +11,11 @@
 @interface TweetViewController ()
 
 @property (nonatomic, strong) Tweet *tweet;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *createdAtLabel;
 
 @end
 
@@ -39,7 +44,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"%@", self.tweet.userName);
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.tweet.profileImageURL];
+    self.profileImageView.image = [UIImage imageWithData:imageData];
+    self.nameLabel.text = self.tweet.userName;
+    self.screenNameLabel.text = self.tweet.screenName;
+    self.tweetTextLabel.text = self.tweet.tweetText;
+    self.tweetTextLabel.frame = CGRectMake(20,20,260,800);
+    self.tweetTextLabel.numberOfLines = 0;
+    [self.tweetTextLabel sizeToFit];
+    self.createdAtLabel.text = self.tweet.createdAt;
 }
 
 - (void)didReceiveMemoryWarning

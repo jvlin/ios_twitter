@@ -22,4 +22,10 @@
 
 - (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(int)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+
+// Post API
+
+- (void)postTweetWithText:(NSString *)tweet success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

@@ -31,10 +31,12 @@
 {
     self.nameLabel.text = self.tweet.userName;
     self.screenNameLabel.text = self.tweet.screenName;
-    self.tweetTextView.text = self.tweet.tweetText;
-    [self.tweetTextView setTextContainerInset:UIEdgeInsetsZero];
+    self.tweetTextLabel.text = self.tweet.tweetText;
+    //[self.tweetTextLabel sizeToFit];
+    //[self.tweetTextView setTextContainerInset:UIEdgeInsetsZero];
 
     [self.profileImageView setImageWithURL:self.tweet.profileImageURL];
+    self.timeAgoLabel.text = self.tweet.timeAgo;
 }
 
 @end

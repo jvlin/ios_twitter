@@ -11,11 +11,12 @@
 @interface TweetCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
+@property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 
 @property (strong, nonatomic) Tweet *tweet;
+@property (weak, nonatomic) IBOutlet UILabel *timeAgoLabel;
 - (void)loadData;
 
 

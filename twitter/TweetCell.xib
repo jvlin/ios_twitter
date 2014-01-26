@@ -22,6 +22,7 @@
                         <rect key="frame" x="68" y="8" width="64" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" staticText="YES" notEnabled="YES"/>
                             <bool key="isElement" value="NO"/>
                         </accessibility>
                         <constraints>
@@ -35,42 +36,56 @@
                         <rect key="frame" x="164" y="8" width="76" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" staticText="YES" notEnabled="YES"/>
                             <bool key="isElement" value="NO"/>
                         </accessibility>
                         <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
                         <color key="textColor" red="0.64136803668478259" green="0.64136803668478259" blue="0.64136803668478259" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGb-iy-cbq">
-                        <rect key="frame" x="64" y="25" width="239" height="69"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <accessibility key="accessibilityConfiguration">
-                            <bool key="isElement" value="NO"/>
-                        </accessibility>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ocZ-zg-bDG"/>
-                        </constraints>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                    </textView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pom-18-0xP">
                         <rect key="frame" x="12" y="12" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstAttribute="width" constant="48" id="eyf-3n-XMc"/>
                             <constraint firstAttribute="height" constant="48" id="m2Z-lx-4VJ"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="232" translatesAutoresizingMaskIntoConstraints="NO" id="Anl-7v-GAf">
+                        <rect key="frame" x="68" y="26" width="232" height="13"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" staticText="YES" notEnabled="YES"/>
+                            <bool key="isElement" value="NO"/>
+                        </accessibility>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="232" id="sgR-GC-gEA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhh-wl-7UC">
+                        <rect key="frame" x="265" y="9" width="35" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" staticText="YES" notEnabled="YES"/>
+                        </accessibility>
+                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                        <color key="textColor" red="0.46966287364130432" green="0.46966287364130432" blue="0.46966287364130432" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="wRv-ll-Z9U" firstAttribute="top" secondItem="uIc-BL-DG1" secondAttribute="top" constant="8" id="991-wC-EYi"/>
                     <constraint firstItem="wRv-ll-Z9U" firstAttribute="leading" secondItem="pom-18-0xP" secondAttribute="trailing" constant="8" id="DTF-1t-fdA"/>
                     <constraint firstItem="0od-Qc-pOK" firstAttribute="leading" secondItem="wRv-ll-Z9U" secondAttribute="trailing" constant="3" id="Ddc-Zz-wwi"/>
+                    <constraint firstAttribute="bottom" secondItem="Anl-7v-GAf" secondAttribute="bottom" constant="12" id="Dj8-S9-wys"/>
                     <constraint firstItem="0od-Qc-pOK" firstAttribute="centerY" secondItem="wRv-ll-Z9U" secondAttribute="centerY" id="SXf-mc-ZJa"/>
                     <constraint firstItem="pom-18-0xP" firstAttribute="leading" secondItem="uIc-BL-DG1" secondAttribute="leading" constant="12" id="bEo-qi-M7s"/>
+                    <constraint firstItem="Anl-7v-GAf" firstAttribute="top" secondItem="uIc-BL-DG1" secondAttribute="top" constant="26" id="gMI-t6-1kE"/>
                     <constraint firstItem="pom-18-0xP" firstAttribute="top" secondItem="uIc-BL-DG1" secondAttribute="top" constant="8" id="iG7-G0-A81"/>
                 </constraints>
             </tableViewCellContentView>
@@ -78,7 +93,8 @@
                 <outlet property="nameLabel" destination="wRv-ll-Z9U" id="Yox-uK-lcG"/>
                 <outlet property="profileImageView" destination="pom-18-0xP" id="dbF-9f-0GF"/>
                 <outlet property="screenNameLabel" destination="0od-Qc-pOK" id="wSU-0d-kiq"/>
-                <outlet property="tweetTextView" destination="XGb-iy-cbq" id="8hx-rJ-HBc"/>
+                <outlet property="timeAgoLabel" destination="Xhh-wl-7UC" id="JYq-ZD-HF0"/>
+                <outlet property="tweetTextLabel" destination="Anl-7v-GAf" id="mFT-Rh-UjP"/>
             </connections>
         </tableViewCell>
     </objects>
