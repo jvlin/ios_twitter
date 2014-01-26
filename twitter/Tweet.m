@@ -22,7 +22,7 @@
     for (NSDictionary *params in array) {
         if (count == 0) {
             //NSDictionary *user = [params //valueForKeyPath:@"user"];
-            NSLog(@"%@", params);
+            //NSLog(@"%@", params);
         }
 
         [tweets addObject:[[Tweet alloc] initWithDictionary:params]];

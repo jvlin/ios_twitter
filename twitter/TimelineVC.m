@@ -47,6 +47,10 @@
     
     UINib *customNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
     [self.tableView registerNib:customNib forCellReuseIdentifier:@"TweetCell"];
+    
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+//    [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+//    self.refreshControl = refreshControl;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -149,7 +153,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Tweet *tweet = self.tweets[indexPath.row];
+    
     [self.navigationController pushViewController:[[TweetViewController alloc] initWithTweet:tweet] animated:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    NSInteger maxOffset = scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y;
+    if (maxOffset <= 50) {
+        NSLog(@"calling scroll view did end dragging");
+        int tweetCount = self.tweets.count;
+        Tweet *lastTweet = self.tweets[tweetCount - 1];
+        long long maxId = [lastTweet.statusId longLongValue];
+//        int maxIdInInt = [lastTweet.statusId intValue];
+        maxId--;
+        NSLog(@"tweet count: %i", tweetCount);
+        NSLog(@"maxId: %@",lastTweet.statusId);
+//        NSLog(@"maxIdInInt: %i", maxIdInInt);
+        
+        [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:lastTweet.statusId success:^(AFHTTPRequestOperation *operation, id response) {
+                [self.tweets addObjectsFromArray:[Tweet tweetsWithArray:response]];
+                NSMutableArray *insertPaths = [[NSMutableArray alloc] init];
+                for (int i = tweetCount; i < self.tweets.count; i++) {
+                    [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationBottom];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            // Do nothing
+            NSLog(@"fetching new time line failed");
+        }];
+    }
 }
 
 /*
@@ -180,11 +212,14 @@
 
 - (void)reload {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"reload success");
         //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Do nothing
+        NSLog(@"reload failed");
+        NSLog(@"%@", error);
     }];
 }
 
