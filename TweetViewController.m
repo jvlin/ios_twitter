@@ -7,6 +7,7 @@
 //
 
 #import "TweetViewController.h"
+#import "ComposeViewController.h"
 
 @interface TweetViewController ()
 
@@ -16,6 +17,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createdAtLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoritesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetsLabel;
+- (IBAction)onFavoriteIcon:(id)sender;
+- (IBAction)onRetweetIcon:(id)sender;
+- (IBAction)onReplyIcon:(id)sender;
 
 @end
 
@@ -53,6 +59,8 @@
     self.tweetTextLabel.numberOfLines = 0;
     [self.tweetTextLabel sizeToFit];
     self.createdAtLabel.text = self.tweet.createdAt;
+    self.retweetsLabel.text = [NSString stringWithFormat:@"%i RETWEETS", self.tweet.retweetCount];
+    self.favoritesLabel.text = [NSString stringWithFormat:@"%i FAVORITES", self.tweet.favoritesCount];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,4 +69,39 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onFavoriteIcon:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Favorite Successful" message:@"You have favorited this status!" delegate:nil cancelButtonTitle:@"OK"        otherButtonTitles:nil];
+    NSLog(@"favoriting status with id: %@", self.tweet.statusId);
+
+    [[TwitterClient instance] favoriteStatusWithId:self.tweet.statusId success:^(AFHTTPRequestOperation *operation, id response) {
+        [alert show];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //handle error
+        NSLog(@"Error favoriting");
+        NSLog(@"%@", error);
+    }];
+}
+
+- (IBAction)onRetweetIcon:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Retweet Successful"              message:@"You have retweeted this status!"
+        delegate:nil
+        cancelButtonTitle:@"OK"
+        otherButtonTitles:nil];
+    [[TwitterClient instance] retweetStatusWithId:self.tweet.statusId success:^(AFHTTPRequestOperation *operation, id response) {
+        [alert show];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //handle error
+        NSLog(@"Error favoriting");
+        NSLog(@"%@", error);
+    }];
+}
+
+- (IBAction)onReplyIcon:(id)sender {
+    ComposeViewController *cvc = [[ComposeViewController alloc] init];
+    cvc.isReply = YES;
+    cvc.replyUserName = self.tweet.screenName;
+    cvc.replyStatusId = self.tweet.statusId;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cvc];
+    [self.navigationController presentViewController:navController animated:YES completion:nil];
+}
 @end

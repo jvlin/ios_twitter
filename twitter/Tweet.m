@@ -22,7 +22,7 @@
     for (NSDictionary *params in array) {
         if (count == 0) {
             //NSDictionary *user = [params //valueForKeyPath:@"user"];
-            //NSLog(@"%@", params);
+            NSLog(@"%@", params);
         }
 
         [tweets addObject:[[Tweet alloc] initWithDictionary:params]];
@@ -36,6 +36,7 @@
     if (self) {
         //initialize properties
         NSDictionary *user = [dictionary valueForKeyPath:@"user"];
+        self.statusId = dictionary[@"id_str"];
         self.screenName = user[@"screen_name"];
         self.userName = [user valueForKey:@"name"];
         self.tweetText = dictionary[@"text"];

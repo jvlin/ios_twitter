@@ -29,6 +29,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.isReply = NO;
     }
     return self;
 }
@@ -39,7 +40,6 @@
     // Do any additional setup after loading the view from its nib.
     self.currentUser = [User currentUser];
     self.nameLabel.text = self.currentUser.name;
-    NSLog(@"%@",self.currentUser.name);
     self.screenNameLabel.text = self.currentUser.screenName;
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.currentUser.profileImageURL];
     self.profileImageView.image = [UIImage imageWithData:imageData];
@@ -52,13 +52,23 @@
 }
 
 - (void)onTweetButton {
-
-    // this should be fast.
-    [[TwitterClient instance] postTweetWithText:self.composeTextView.text success:^(AFHTTPRequestOperation *operation, id response) {
-        [self onCancelButton];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // do nothing
-    }];
+    if (self.isReply && self.replyUserName) {
+        [[TwitterClient instance] replyStatusWithText:self.composeTextView.text statusId:self.replyStatusId success:^(AFHTTPRequestOperation *operation, id response) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reply Successful"        message:@"You have replied to this status!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [self onCancelButton];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //handle error
+            NSLog(@"error tweeting reply");
+        }];
+    } else {
+        // this should be fast.
+        [[TwitterClient instance] postTweetWithText:self.composeTextView.text success:^(AFHTTPRequestOperation *operation, id response) {
+            [self onCancelButton];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            // do nothing
+        }];
+    }
     
 }
 
@@ -76,6 +86,9 @@
 {
     textView.text = @"";
     [textView setTextColor:[UIColor blackColor]];
+    if (self.isReply) {
+        textView.text = [NSString stringWithFormat:@"@%@ ", self.replyUserName];
+    }
 }
 
 @end

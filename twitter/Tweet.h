@@ -22,6 +22,7 @@
 @property (nonatomic, assign) int retweetCount;
 @property (nonatomic, strong) NSString *timeAgo;
 @property (nonatomic, assign) int favoritesCount;
+@property (nonatomic, strong) NSString *statusId;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

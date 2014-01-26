@@ -8,8 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetViewController">
             <connections>
                 <outlet property="createdAtLabel" destination="IZB-v1-DeD" id="LNe-En-cPY"/>
+                <outlet property="favoritesLabel" destination="JFG-pc-QWg" id="j64-yP-855"/>
                 <outlet property="nameLabel" destination="ePm-7b-3y0" id="W5o-mg-GxY"/>
                 <outlet property="profileImageView" destination="hf2-z4-dlp" id="Htr-t1-RM0"/>
+                <outlet property="retweetsLabel" destination="XHB-O6-73L" id="aYJ-OV-MUy"/>
                 <outlet property="screenNameLabel" destination="k78-Ke-6iL" id="0Bx-kV-69x"/>
                 <outlet property="tweetTextLabel" destination="Toz-el-PAj" id="Uer-rJ-09J"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -32,7 +34,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k78-Ke-6iL">
-                    <rect key="frame" x="87" y="98" width="173" height="21"/>
+                    <rect key="frame" x="87" y="92" width="173" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                     <color key="textColor" red="0.55116338315217384" green="0.55116338315217384" blue="0.55116338315217384" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,14 +56,102 @@
                     <color key="textColor" red="0.58742357336956519" green="0.58742357336956519" blue="0.58742357336956519" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q94-Cr-znk">
+                    <rect key="frame" x="28" y="199" width="232" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sPR-7V-VcX">
+                    <rect key="frame" x="28" y="209" width="260" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.83101222826086962" green="0.83101222826086962" blue="0.83101222826086962" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGS-51-irz">
+                    <rect key="frame" x="28" y="311" width="260" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.83101222829999999" green="0.83101222829999999" blue="0.83101222829999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fMB-ei-3UA">
+                    <rect key="frame" x="31" y="262" width="260" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.83101222829999999" green="0.83101222829999999" blue="0.83101222829999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="100 Retweets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHB-O6-73L">
+                    <rect key="frame" x="28" y="226" width="111" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="125" id="cKb-9o-ooa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="50 Favorites" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFG-pc-QWg">
+                    <rect key="frame" x="162" y="226" width="126" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="Favorite" translatesAutoresizingMaskIntoConstraints="NO" id="jq0-Ho-GpB">
+                    <rect key="frame" x="228" y="275" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="v3e-Ji-sCV" appends="YES" id="XwX-CY-p8n"/>
+                    </connections>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="Retweet" translatesAutoresizingMaskIntoConstraints="NO" id="CYm-CY-Snp">
+                    <rect key="frame" x="127" y="277" width="35" height="25"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                    </accessibility>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="6hT-Ak-pxR" appends="YES" id="M7x-H4-ou0"/>
+                    </connections>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="Reply" translatesAutoresizingMaskIntoConstraints="NO" id="uXC-6A-63r">
+                    <rect key="frame" x="39" y="273" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                    </accessibility>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="VLV-aA-rw7" appends="YES" id="aO7-fl-MbY"/>
+                    </connections>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="XHB-O6-73L" firstAttribute="centerY" secondItem="JFG-pc-QWg" secondAttribute="centerY" id="7iq-YW-0Hf"/>
                 <constraint firstItem="IZB-v1-DeD" firstAttribute="top" secondItem="Toz-el-PAj" secondAttribute="bottom" constant="10" id="Kqk-zw-RDV"/>
                 <constraint firstItem="Toz-el-PAj" firstAttribute="top" secondItem="hf2-z4-dlp" secondAttribute="bottom" constant="15" id="jhc-b9-HU0"/>
+                <constraint firstItem="JFG-pc-QWg" firstAttribute="leading" secondItem="XHB-O6-73L" secondAttribute="trailing" constant="10" id="ryn-Pf-l2N"/>
+                <constraint firstItem="XHB-O6-73L" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="28" id="zzp-zi-nLg"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <tapGestureRecognizer id="v3e-Ji-sCV">
+            <connections>
+                <action selector="onFavoriteIcon:" destination="-1" id="N4E-v2-W1Q"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="6hT-Ak-pxR">
+            <connections>
+                <action selector="onRetweetIcon:" destination="-1" id="eb6-JE-yUV"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="VLV-aA-rw7">
+            <connections>
+                <action selector="onReplyIcon:" destination="-1" id="jeU-al-1NP"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="Favorite" width="25" height="25"/>
+        <image name="Reply" width="30" height="30"/>
+        <image name="Retweet" width="35" height="25"/>
+    </resources>
 </document>

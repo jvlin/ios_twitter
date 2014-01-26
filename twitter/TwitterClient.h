@@ -25,7 +25,14 @@
 
 // Post API
 
-- (void)postTweetWithText:(NSString *)tweet success:(void (^)(AFHTTPRequestOperation *operation, id response))success
-                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)postTweetWithText:(NSString *)tweet success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)favoriteStatusWithId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)retweetStatusWithId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)replyStatusWithText:(NSString *)reply statusId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+
 
 @end

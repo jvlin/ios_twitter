@@ -10,4 +10,8 @@
 
 @interface ComposeViewController : UIViewController <UITextViewDelegate>
 
+@property (nonatomic, assign) BOOL isReply;
+@property (nonatomic, strong) NSString *replyUserName;
+@property (nonatomic, strong) NSString *replyStatusId;
+
 @end

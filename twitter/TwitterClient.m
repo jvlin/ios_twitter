@@ -65,10 +65,28 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
 }
 
-- (void)postTweetWithText:(NSString *)tweet success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+- (void)postTweetWithText:(NSString *)tweet success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"status": tweet}];
     [self postPath:@"1.1/statuses/update.json" parameters:params success:success failure:failure];
-    
+}
+
+- (void)favoriteStatusWithId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id": statusId}];
+    [self postPath:@"1.1/favorites/create.json" parameters:params success:success failure:failure];
+}
+
+- (void)retweetStatusWithId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id": statusId}];
+    [self postPath:[NSString stringWithFormat:@"1.1/statuses/retweet/%@.json",statusId] parameters:params success:success failure:failure];
+}
+
+- (void)replyStatusWithText:(NSString *)reply statusId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"status": reply, @"in_reply_to_status_id": statusId}];
+    [self postPath:@"1.1/statuses/update.json" parameters:params success:success failure:failure];
 }
 
 #pragma mark - Private methods
