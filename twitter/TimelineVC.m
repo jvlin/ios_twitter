@@ -164,13 +164,15 @@
         int tweetCount = self.tweets.count;
         Tweet *lastTweet = self.tweets[tweetCount - 1];
         long long maxId = [lastTweet.statusId longLongValue];
+        maxId--;
+        NSString *maxIdStr = [NSString stringWithFormat:@"%lld", maxId];
 //        int maxIdInInt = [lastTweet.statusId intValue];
         maxId--;
         NSLog(@"tweet count: %i", tweetCount);
-        NSLog(@"maxId: %@",lastTweet.statusId);
+        NSLog(@"maxId: %@",maxIdStr);
 //        NSLog(@"maxIdInInt: %i", maxIdInInt);
         
-        [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:lastTweet.statusId success:^(AFHTTPRequestOperation *operation, id response) {
+        [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:maxIdStr success:^(AFHTTPRequestOperation *operation, id response) {
                 [self.tweets addObjectsFromArray:[Tweet tweetsWithArray:response]];
                 NSMutableArray *insertPaths = [[NSMutableArray alloc] init];
                 for (int i = tweetCount; i < self.tweets.count; i++) {
