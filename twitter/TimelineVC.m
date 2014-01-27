@@ -19,6 +19,7 @@
 - (void)onSignOutButton;
 - (void)onComposeButton;
 - (void)reload;
+- (void)refresh:(UIRefreshControl *)refresh;
 
 @end
 
@@ -48,9 +49,12 @@
     UINib *customNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
     [self.tableView registerNib:customNib forCellReuseIdentifier:@"TweetCell"];
     
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-//    [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
-//    self.refreshControl = refreshControl;
+    // Initialize Refresh Control
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    // Configure Refresh Control
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    // Configure View Controller
+    [self setRefreshControl:refreshControl];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -223,6 +227,12 @@
         NSLog(@"reload failed");
         NSLog(@"%@", error);
     }];
+}
+
+- (void)refresh:(UIRefreshControl *)refresh {
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing data..."];
+    [self reload];
+    [refresh endRefreshing];
 }
 
 @end
