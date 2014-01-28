@@ -186,6 +186,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             // Do nothing
             NSLog(@"fetching new time line failed");
+            NSLog(@"%@", error);
         }];
     }
 }
