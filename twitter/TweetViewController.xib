@@ -127,6 +127,10 @@
                         <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                     </accessibility>
                     <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="PT3-yd-165"/>
+                        <constraint firstAttribute="width" constant="30" id="crO-GT-ZhL"/>
+                    </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="VLV-aA-rw7" appends="YES" id="aO7-fl-MbY"/>
                     </connections>
